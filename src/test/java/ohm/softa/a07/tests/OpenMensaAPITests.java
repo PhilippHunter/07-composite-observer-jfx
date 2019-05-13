@@ -9,6 +9,7 @@ import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import retrofit2.Call;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -47,12 +48,13 @@ class OpenMensaAPITests {
 	@Test
 	void testGetMeals() throws IOException {
 		// TODO prepare call
-		Call<Meal> mealCall = openMensaAPI.getMeals(229, new SimpleDateFormat("2019-05-14"));
+		Call<List<Meal>> mealCall = openMensaAPI.getMeals(269, new SimpleDateFormat("2019-05-14"));
 
 		// TODO execute the call synchronously
+		Response<List<Meal>> mealResponse = mealCall.execute();
 
 		// TODO unwrap the body
-		List<Meal> meals = null;
+		List<Meal> meals = mealResponse.body();
 
 		assertNotNull(meals);
 		assertNotEquals(0, meals.size());
