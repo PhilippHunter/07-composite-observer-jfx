@@ -14,8 +14,11 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import java.io.IOException;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -23,6 +26,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 class OpenMensaAPITests {
 
 	private static final Logger logger = LogManager.getLogger(OpenMensaAPITests.class);
+	private static final DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
 	private OpenMensaAPI openMensaAPI;
 
 	@BeforeAll
@@ -48,7 +52,7 @@ class OpenMensaAPITests {
 	@Test
 	void testGetMeals() throws IOException {
 		// TODO prepare call
-		Call<List<Meal>> mealCall = openMensaAPI.getMeals(269, new SimpleDateFormat("2019-05-14"));
+		Call<List<Meal>> mealCall = openMensaAPI.getMeals(269, dateFormat.format(new Date()));
 
 		// TODO execute the call synchronously
 		Response<List<Meal>> mealResponse = mealCall.execute();
